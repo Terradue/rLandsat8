@@ -13,7 +13,7 @@
 	<scm>
 		<connection>scm:git:git@github.com:Terradue/rLandsat8.git</connection>
 		<developerConnection>scm:git:git@github.com:Terradue/rLandsat8.git</developerConnection>
-		<url>https://github.com/Terradue/rLandsat8</url>
+		<url>https://github.com/Terradue/rLandsat8.git</url>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -246,8 +246,7 @@
 					</execution>
 				</executions>
 			</plugin>
--->
-<!--
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>rpm-maven-plugin</artifactId>
@@ -306,7 +305,7 @@
 					<needarch>noarch</needarch>
 				</configuration>
 			</plugin>
--->
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
@@ -320,7 +319,7 @@
 					</execution>
 				</executions>
 			</plugin>
-
+-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
@@ -370,6 +369,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+
 			<plugin>
 				<groupId>de.jutzig</groupId>
 				<artifactId>github-release-plugin</artifactId>
@@ -407,6 +407,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			
 			<plugin>
 				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
@@ -426,6 +427,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
 				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
@@ -445,6 +447,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
@@ -454,6 +457,7 @@
 					<skipDeploy>true</skipDeploy>
 				</configuration>
 			</plugin>
+
 		</plugins>
 	</build>
 
