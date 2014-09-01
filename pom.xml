@@ -5,7 +5,7 @@
 
 	<groupId>com.terradue.ciop.app</groupId>
 	<artifactId>rLandsat8</artifactId>
-	<packaging>rpm</packaging>
+	<packaging>pom</packaging>
 	<name>rLandsat8</name>
 	<description>rLandsat8</description>
 	<version>0.1-SNAPSHOT</version>
