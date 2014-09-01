@@ -50,6 +50,7 @@
 
 	<build>
 		<plugins>
+<!--
 			<plugin>
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>2.5</version>
@@ -65,7 +66,7 @@
 					</filesets>
 				</configuration>
 			</plugin>
-
+-->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
@@ -186,7 +187,7 @@
 							</arguments>
 						</configuration>
 					</execution>
-				
+				<!--
 					<execution>
 						<id>R install app</id>
 						<phase>install</phase>
@@ -205,7 +206,7 @@
 							</arguments>
 						</configuration>
 					</execution>
-				
+				-->
 					<execution>
 						<id>rgitbook</id>
 						<phase>site</phase>
@@ -223,7 +224,7 @@
 
 				</executions>
 			</plugin>
-
+<!--
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.6</version>
@@ -245,7 +246,7 @@
 					</execution>
 				</executions>
 			</plugin>
-
+-->
 <!--
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -319,7 +320,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
@@ -332,14 +333,14 @@
 							<target>
 								<mkdir dir="${project.build.directory}/R/src" />
 								<mkdir dir="${project.build.directory}/R/lib" />
-								<mkdir dir="/application/share/R/library" />
+								<!-- <mkdir dir="/application/share/R/library" /> -->
 							</target>
 						</configuration>
 						<goals>
 							<goal>run</goal>
 						</goals>
 					</execution>
-				
+				<!--
 					<execution>
 						<id>change perm</id>
 						<phase>install</phase>
@@ -353,7 +354,7 @@
 							<goal>run</goal>
 						</goals>
 					</execution>
-				
+				-->
 				</executions>
 			</plugin>
 
