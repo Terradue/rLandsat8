@@ -23,7 +23,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<github.global.server>github</github.global.server>
-		<github.site.repositoryName>rLandsat8</github.site.repositoryName>
+		<github.site.repositoryName>dcs-r-landsat8-thermal</github.site.repositoryName>
 		<github.site.repositoryOwner>Terradue</github.site.repositoryOwner>
 	</properties>
 
@@ -111,23 +111,23 @@
 							</resources>
 						</configuration>
 					</execution>
-						<execution>
+					<execution>
 						<id>copy-doc-src</id>
 						<!-- here the phase you need -->
-<phase>pre-site</phase>
-<goals>
-<goal>copy-resources</goal>
-</goals>
-<configuration>
-<outputDirectory>${project.build.directory}/R/src/doc</outputDirectory>
-<resources>
-<resource>
-<directory>${basedir}/src/main/doc</directory>
-<filtering>false</filtering>
-</resource>
-</resources>
-</configuration>
-</execution>
+						<phase>pre-site</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/R/src/doc</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/doc</directory>
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 
@@ -186,6 +186,7 @@
 							</arguments>
 						</configuration>
 					</execution>
+				<!--
 					<execution>
 						<id>R install app</id>
 						<phase>install</phase>
@@ -204,6 +205,7 @@
 							</arguments>
 						</configuration>
 					</execution>
+				-->
 					<execution>
 						<id>rgitbook</id>
 						<phase>site</phase>
@@ -221,7 +223,7 @@
 
 				</executions>
 			</plugin>
-
+<!--
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.6</version>
@@ -243,7 +245,7 @@
 					</execution>
 				</executions>
 			</plugin>
-
+-->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>rpm-maven-plugin</artifactId>
@@ -315,13 +317,14 @@
 							<target>
 								<mkdir dir="${project.build.directory}/R/src" />
 								<mkdir dir="${project.build.directory}/R/lib" />
-								<mkdir dir="/application/share/R/library" />
+								<!--<mkdir dir="/application/share/R/library" />-->
 							</target>
 						</configuration>
 						<goals>
 							<goal>run</goal>
 						</goals>
 					</execution>
+				<!--
 					<execution>
 						<id>change perm</id>
 						<phase>install</phase>
@@ -335,6 +338,7 @@
 							<goal>run</goal>
 						</goals>
 					</execution>
+				-->
 				</executions>
 			</plugin>
 
