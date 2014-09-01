@@ -23,7 +23,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<github.global.server>github</github.global.server>
-		<github.site.repositoryName>dcs-r-landsat8-thermal</github.site.repositoryName>
+		<github.site.repositoryName>rLandsat8</github.site.repositoryName>
 		<github.site.repositoryOwner>Terradue</github.site.repositoryOwner>
 	</properties>
 
