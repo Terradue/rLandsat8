@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.terradue.ciop.app</groupId>
+	<artifactId>rLandsat8</artifactId>
+	<packaging>rpm</packaging>
+	<name>rLandsat8</name>
+	<description>rLandsat8</description>
+	<version>0.1-SNAPSHOT</version>
+
+	<scm>
+		<connection>scm:git:git@github.com:Terradue/rLandsat8.git</connection>
+		<developerConnection>scm:git:git@github.com:Terradue/rLandsat8.git</developerConnection>
+		<url>https://github.com/Terradue/rLandsat8</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.deploy.skip>true</maven.deploy.skip>
+		<github.global.server>github</github.global.server>
+		<github.site.repositoryName>rLandsat8</github.site.repositoryName>
+		<github.site.repositoryOwner>Terradue</github.site.repositoryOwner>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>repository.terradue.com</id>
+			<name>repository.terradue.com-releases</name>
+			<url>http://repository.terradue.com/artifactory/libs-release-public</url>
+			<releases>
+				<enabled>true</enabled>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<snapshots />
+			<id>repository.terradue.com</id>
+			<name>repository.terradue.com-releases</name>
+			<url>http://repository.terradue.com/artifactory/libs-release-public</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>/application</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>parse-version</id>
+						<goals>
+							<goal>parse-version</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<!-- here the phase you need -->
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/R/src/rLandsat8</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/R/rLandsat8</directory>
+									<filtering>true</filtering>
+									<includes>
+										<include>DESCRIPTION</include>
+									</includes>
+								</resource>
+								<resource>
+									<directory>${basedir}/src/main/R/rLandsat8</directory>
+									<filtering>false</filtering>
+									<excludes>
+										<exclude>DESCRIPTION</exclude>
+									</excludes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+						<execution>
+						<id>copy-doc-src</id>
+						<!-- here the phase you need -->
+<phase>pre-site</phase>
+<goals>
+<goal>copy-resources</goal>
+</goals>
+<configuration>
+<outputDirectory>${project.build.directory}/R/src/doc</outputDirectory>
+<resources>
+<resource>
+<directory>${basedir}/src/main/doc</directory>
+<filtering>false</filtering>
+</resource>
+</resources>
+</configuration>
+</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.3.1</version>
+				<executions>
+					<execution>
+						<id>roxygen</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>R</executable>
+							<workingDirectory>${project.build.directory}/R/src/rLandsat8</workingDirectory>
+							<arguments>
+								<argument>-e</argument>
+								<argument>library(roxygen2); roxygenise()</argument>
+							</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>R compile</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>R</executable>
+							<workingDirectory>${project.build.directory}/R/src</workingDirectory>
+							<arguments>
+								<argument>CMD</argument>
+								<argument>build</argument>
+								<argument>--binary</argument>
+								<argument>rLandsat8</argument>
+							</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>R install</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>R</executable>
+							<workingDirectory>${project.build.directory}/R/src</workingDirectory>
+							<arguments>
+								<argument>CMD</argument>
+								<argument>INSTALL</argument>
+								<argument>-l</argument>
+								<argument>${project.build.directory}/R/lib/</argument>
+								<argument>${project.build.directory}/R/src/rLandsat8_${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.tar.gz</argument>
+							</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>R install app</id>
+						<phase>install</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>R</executable>
+							<workingDirectory>${project.build.directory}/R/src</workingDirectory>
+							<arguments>
+								<argument>CMD</argument>
+								<argument>INSTALL</argument>
+								<argument>-l</argument>
+								<argument>/application/share/R/library</argument>
+								<argument>${project.build.directory}/R/src/rLandsat8_${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.tar.gz</argument>
+							</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>rgitbook</id>
+						<phase>site</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>R</executable>
+							<arguments>
+								<argument>-e</argument>
+								<argument><![CDATA[library(Rgitbook); buildGitbook(source.dir='${project.build.directory}/R/src/doc', out.dir='${project.build.directory}/R/doc');]]></argument>
+							</arguments>
+						</configuration>
+					</execution>
+
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-app-resources</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>/application</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/app-resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>rpm-maven-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<copyright>${project.inceptionYear}, Terradue, GPL</copyright>
+					<distribution>Terradue ${project.inceptionYear}</distribution>
+					<group>air</group>
+					<packager>Terradue</packager>
+					<name>${project.artifactId}</name>
+					<defaultDirmode>775</defaultDirmode>
+					<defaultFilemode>664</defaultFilemode>
+					<defaultUsername>root</defaultUsername>
+					<defaultGroupname>ciop</defaultGroupname>
+					<prefix>/application</prefix>
+					<autoRequires>true</autoRequires>
+					<release>ciop</release>
+					<mappings>
+						<mapping>
+							<directory>/application</directory>
+							<sources>
+								<source>
+									<location>${basedir}/src/main/app-resources</location>
+								</source>
+							</sources>
+						</mapping>
+						<mapping>
+							<directory>/application/share/R/library</directory>
+							<sources>
+								<source>
+									<location>${project.build.directory}/R/lib</location>
+								</source>
+							</sources>
+						</mapping>
+						<mapping>
+							<directory>/application</directory>
+							<sources>
+								<source>
+									<location>${basedir}/src/main/app-resources</location>
+									<includes>
+										<include>**/run</include>
+										<include>**/run.R</include>
+										<include>**/bin/*</include>
+										<include>**/*.sh</include>
+										<include>**/libexec/*</include>
+									</includes>
+								</source>
+							</sources>
+							<filemode>775</filemode>
+						</mapping>
+					</mappings>
+
+					<provides>
+						<provide>${project.artifactId}</provide>
+					</provides>
+					<needarch>noarch</needarch>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>create target</id>
+						<phase>initialize</phase>
+						<configuration>
+							<target>
+								<mkdir dir="${project.build.directory}/R/src" />
+								<mkdir dir="${project.build.directory}/R/lib" />
+								<mkdir dir="/application/share/R/library" />
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>change perm</id>
+						<phase>install</phase>
+						<configuration>
+							<target>
+								<chmod dir="/application" includes="**/bin/*, **/run*"
+									perm="755" />
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.scm</groupId>
+						<artifactId>maven-scm-provider-gitexe</artifactId>
+						<version>1.9</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>de.jutzig</groupId>
+				<artifactId>github-release-plugin</artifactId>
+				<version>1.0.3</version>
+				<executions>
+					<execution>
+						<id>github-upload</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>release</goal>
+						</goals>
+						<inherited>false</inherited>
+						<configuration>
+							<releaseName>v${project.version}</releaseName>
+							<tag>v${project.version}</tag>
+							<artifact>${project.build.directory}/rpm/${project.artifactId}/RPMS/noarch/${project.artifactId}-${parsedVersion.majorVersion}.${parsedVersion.minorVersion}-ciop.noarch.rpm</artifact>
+							<overwriteArtifact>true</overwriteArtifact>
+						</configuration>
+					</execution>
+					<execution>
+						<id>github-upload-R</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>release</goal>
+						</goals>
+						<inherited>false</inherited>
+						<configuration>
+							<releaseName>v${project.version}</releaseName>
+							<tag>v${project.version}</tag>
+							<artifact>${project.build.directory}/R/src/rLandsat8_${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.tar.gz</artifact>
+							<overwriteArtifact>true</overwriteArtifact>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<version>0.8</version>
+				<configuration>
+					<message>Creating site for ${project.version}</message>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>site</goal>
+						</goals>
+						<phase>site-deploy</phase>
+						<configuration>
+							<outputDirectory>${project.build.directory}/R/doc</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<version>0.9</version>
+				<configuration>
+					<message>Creating site for ${project.version}</message>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>site</goal>
+						</goals>
+						<phase>site-deploy</phase>
+						<configuration>
+							<outputDirectory>${project.build.directory}/R/doc</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<skip>true</skip>
+					<skipDeploy>true</skipDeploy>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+
+
