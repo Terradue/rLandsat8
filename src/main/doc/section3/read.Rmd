@@ -1,0 +1,29 @@
+To read a Landsat 8 product use the *ReadLandsat8* function:
+
+```coffee
+library(rLandsat8)
+
+setwd("~/Downloads")
+product  <- "LC82040322013219LGN00"
+l <- ReadLandsat8(product)
+```
+
+Access the product metadata
+
+```coffee
+product.metadata <- l$metadata
+```
+
+product.metadata is an R list containing the Landsat 8 product metadata.
+
+To access a metadata field value, e.g. the *wrs path*, do:
+
+```coffee
+product.metadata$wrs_path
+```
+
+To access a band:
+
+```coffee
+blue <- l$band$blue
+```
