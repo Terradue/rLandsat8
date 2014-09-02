@@ -7,7 +7,7 @@ OLI and TIRS band data can be converted to TOA spectral radiance using the radia
 
 $${ L }_{ \lambda }={ M } $$
 
-$${ L }_{ \lambda } = { M }\_{ \lambda }$$
+\\({ L }_{ \lambda } = { M }_{ \lambda }\\)
 
 $${ L }_{ \lambda } { L }_{ \lambda }$$
 
