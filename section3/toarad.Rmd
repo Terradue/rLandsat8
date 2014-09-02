@@ -4,7 +4,8 @@ The products are delivered in 16-bit unsigned integer format and can be rescaled
 
 OLI and TIRS band data can be converted to TOA spectral radiance using the radiance rescaling factors provided in the metadata file:
 
-$${ L }_{ \lambda  }={ M }_{ L }{ Q }_{ cal }+{ A }_{ L }$$
+
+$${ L }_{ \lambda }={ M }_{ L }{ Q }_{ cal }+{ A }_{ L }$$
 
 
 $${ e }^{ i\pi }+1=0$$
