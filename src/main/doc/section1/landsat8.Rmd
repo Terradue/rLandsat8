@@ -1,0 +1,7 @@
+Landsat represents the world's longest continuously acquired collection of space-based moderate-resolution land remote sensing data. 
+
+Four decades of imagery provides a unique resource for those who work in agriculture, geology, forestry, regional planning, education, mapping, and global change research. 
+
+Landsat images are also invaluable for emergency response and disaster relief.
+
+As a joint initiative between the U.S. Geological Survey (USGS) and NASA, the Landsat Project and the data it collects support government, commercial, industrial, civilian, military, and educational communities throughout the United States and worldwide. 
