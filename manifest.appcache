@@ -1,8 +1,18 @@
 CACHE MANIFEST
-# Revision 1409660595080
+# Revision 1409690915277
 
 CACHE:
 index.html
+section1/discover.html
+section1/getdatausgs.html
+section1/landsat8.html
+section2/builddoc.html
+section2/development.html
+section2/installation.html
+section2/release.html
+section3/read.html
+section3/started.html
+section3/toarad.html
 gitbook/app.js
 gitbook/fonts/fontawesome/FontAwesome.otf
 gitbook/fonts/fontawesome/fontawesome-webfont.eot

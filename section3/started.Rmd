@@ -1,0 +1,4 @@
+# Getting Started!
+
+This chapter contains comprehensive thematic examples to help you getting started with rLandsat8.
+

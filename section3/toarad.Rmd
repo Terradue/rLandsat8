@@ -1,0 +1,8 @@
+The standard Landsat 8 products provided by the USGS EROS Center consist of quantized and calibrated scaled Digital Numbers (DN) representing multispectral image data acquired by both the Operational Land Imager (OLI) and Thermal Infrared Sensor (TIRS).  
+
+The products are delivered in 16-bit unsigned integer format and can be rescaled to the Top Of Atmosphere (TOA) radiance using radiometric rescaling coefficients provided in the product metadata file (MTL file), as described below.
+
+OLI and TIRS band data can be converted to TOA spectral radiance using the radiance rescaling factors provided in the metadata file:
+
+{ L }_{ \lambda  }={ M }_{ L }{ Q }_{ cal }+{ A }_{ L }
+
