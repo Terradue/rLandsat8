@@ -5,3 +5,24 @@ Four decades of imagery provides a unique resource for those who work in agricul
 Landsat images are also invaluable for emergency response and disaster relief.
 
 As a joint initiative between the U.S. Geological Survey (USGS) and NASA, the Landsat Project and the data it collects support government, commercial, industrial, civilian, military, and educational communities throughout the United States and worldwide. 
+
+Landsat 8 OLI bands:
+
+|                Bands                | Wavelength (\\(\mu\\)m)  |
+|:-----------------------------------:|--------------------------|
+| Band 1—Coastal aerosol              | 0.43–0.45                |
+| Band 2—Blue                         | 0.45–0.51                |
+| Band 3—Green                        | 0.53–0.59                |
+| Band 4—Red                          | 0.64–0.67                |
+| Band 5—Near infrared (NIR)          | 0.85–0.88                |
+| Band 6—Short-wave infrared (SWIR 1) | 1.57–1.65                |
+| Band 7—Short-wave infrared (SWIR 2) | 2.11–2.29                |
+| Band 8—Panchromatic                 | 0.50–0.68                |
+| Band 9—Cirrus                       | 1.36–1.38                |
+
+Landsat 8 TIRS bands:
+
+|               Bands               | Wavelength (\\(\mu\\)m) |
+|:---------------------------------:|-------------------------|
+| Band 10—Thermal infrared (TIRS) 1 | 10.60–11.19             |
+| Band 11—Thermal infrared (TIRS) 2 | 11.50–12.51             |
