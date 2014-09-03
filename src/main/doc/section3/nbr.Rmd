@@ -20,7 +20,7 @@ ndvi <- ToNBR(l)
 
 Generate the differenced (or delta) NBR:
 
-$$\Delta NBR=NBRprefire\quad =\quad NBRpostfire$$
+$$\Delta NBR=NBRprefire\quad -\quad NBRpostfire$$
 
 This isolates burned from unburned areas, provides a quantitative measure of absolute change in NBR. 
 
