@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>Installation | rLandsat8 - an R interface to Landsat8</title>
+        <title>Vegatation indexes | rLandsat8 - an R interface to Landsat8</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 0.5.6">
@@ -19,10 +19,10 @@
     <meta name="author" content="Terradue">
     
     
-    <link rel="next" href="../section2/release.html" />
+    <link rel="next" href="../section3/nbr.html" />
     
     
-    <link rel="prev" href="../section1/discover.html" />
+    <link rel="prev" href="../section3/bt.html" />
     
 
         
@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rLandsat8" data-level="2" data-basepath=".." data-revision="1409729013270">
+    <div class="book" data-github="Terradue/rLandsat8" data-level="3.5" data-basepath=".." data-revision="1409729013270">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -118,7 +118,7 @@
         
         
         <li>
-            <a href="https://github.com/Terradue/rLandsat8/edit/master/section2/installation.md" target="blank" class="contribute-link">Edit and Contribute</a>
+            <a href="https://github.com/Terradue/rLandsat8/edit/master/section3/vegetation.md" target="blank" class="contribute-link">Edit and Contribute</a>
         </li>
         
 
@@ -416,7 +416,7 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="book-progress">
     <div class="bar">
-        <div class="inner" style="width: 26.666666666666668%;min-width: 20%;"></div>
+        <div class="inner" style="width: 86.66666666666667%;min-width: 80%;"></div>
     </div>
     <div class="chapters">
     
@@ -430,23 +430,23 @@
     
         <a href="../section2/installation.html" title="Installation" class="chapter done new-chapter" data-progress="2" style="left: 26.666666666666668%;"></a>
     
-        <a href="../section2/release.html" title="Installing a release" class="chapter  " data-progress="2.1" style="left: 33.333333333333336%;"></a>
+        <a href="../section2/release.html" title="Installing a release" class="chapter done " data-progress="2.1" style="left: 33.333333333333336%;"></a>
     
-        <a href="../section2/development.html" title="Installing the development version" class="chapter  " data-progress="2.2" style="left: 40%;"></a>
+        <a href="../section2/development.html" title="Installing the development version" class="chapter done " data-progress="2.2" style="left: 40%;"></a>
     
-        <a href="../section2/builddoc.html" title="Building the documentation" class="chapter  " data-progress="2.3" style="left: 46.666666666666664%;"></a>
+        <a href="../section2/builddoc.html" title="Building the documentation" class="chapter done " data-progress="2.3" style="left: 46.666666666666664%;"></a>
     
-        <a href="../section3/started.html" title="Getting started" class="chapter  new-chapter" data-progress="3" style="left: 53.333333333333336%;"></a>
+        <a href="../section3/started.html" title="Getting started" class="chapter done new-chapter" data-progress="3" style="left: 53.333333333333336%;"></a>
     
-        <a href="../section3/read.html" title="Read Landsat 8 data" class="chapter  " data-progress="3.1" style="left: 60%;"></a>
+        <a href="../section3/read.html" title="Read Landsat 8 data" class="chapter done " data-progress="3.1" style="left: 60%;"></a>
     
-        <a href="../section3/toarad.html" title="DN to TOA Radiance" class="chapter  " data-progress="3.2" style="left: 66.66666666666667%;"></a>
+        <a href="../section3/toarad.html" title="DN to TOA Radiance" class="chapter done " data-progress="3.2" style="left: 66.66666666666667%;"></a>
     
-        <a href="../section3/toaref.html" title="DN to TOA Reflectance" class="chapter  " data-progress="3.3" style="left: 73.33333333333333%;"></a>
+        <a href="../section3/toaref.html" title="DN to TOA Reflectance" class="chapter done " data-progress="3.3" style="left: 73.33333333333333%;"></a>
     
-        <a href="../section3/bt.html" title="At Satellite Brightness Temperature" class="chapter  " data-progress="3.4" style="left: 80%;"></a>
+        <a href="../section3/bt.html" title="At Satellite Brightness Temperature" class="chapter done " data-progress="3.4" style="left: 80%;"></a>
     
-        <a href="../section3/vegetation.html" title="Vegatation indexes" class="chapter  " data-progress="3.5" style="left: 86.66666666666667%;"></a>
+        <a href="../section3/vegetation.html" title="Vegatation indexes" class="chapter done " data-progress="3.5" style="left: 86.66666666666667%;"></a>
     
         <a href="../section3/nbr.html" title="Normalized Burn Ratio" class="chapter  " data-progress="3.6" style="left: 93.33333333333333%;"></a>
     
@@ -457,15 +457,44 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_7">
+                    <section class="normal" id="section-gitbook_14">
                     
-                        <h1 id="installation">Installation</h1>
-<p>This chapter provides a guide to install to:</p>
-<ul>
-<li>Install the rLandsat8 package from a release</li>
-<li>Install the development version of the rLandsat8 package</li>
-<li>Build this book</li>
-</ul>
+                        <h2 id="normalized-difference-vegetation-index-ndvi-">Normalized Difference Vegetation Index (NDVI)</h2>
+<p>The NDVI formula is:</p>
+<p>$$NDVI\quad =\quad \frac { \rho NIR\quad -\quad \rho Red }{ \rho NIR\quad +\quad \rho Red }$$</p>
+<h4 id="example">Example</h4>
+<pre><code class="lang-coffee">library(rLandsat8)
+
+setwd(&quot;~/Downloads&quot;)
+product  &lt;- &quot;LC82040322013219LGN00&quot;
+l &lt;- ReadLandsat8(product)
+
+ndvi &lt;- ToNDVI(l)
+</code></pre>
+<h2 id="modified-normalized-difference-water-index-mndwi-">Modified Normalized Difference Water Index (MNDWI)</h2>
+<p>The MNDWI formula is:</p>
+<p>$$MNDWI\quad =\quad \frac { \rho Green\quad -\quad \rho SWIR1 }{ \rho Green\quad +\quad \rho SWIR1 }$$</p>
+<h4 id="example">Example</h4>
+<pre><code class="lang-coffee">library(rLandsat8)
+
+setwd(&quot;~/Downloads&quot;)
+product  &lt;- &quot;LC82040322013219LGN00&quot;
+l &lt;- ReadLandsat8(product)
+
+ndvi &lt;- ToMNDWI(l)
+</code></pre>
+<h2 id="land-surface-water-index-lswi-">Land Surface Water Index (LSWI)</h2>
+<p>The LSWI formula is:</p>
+<p>$$LSWI\quad =\quad \frac { \rho NIR\quad -\quad \rho SWIR1 }{ \rho NIR\quad +\quad \rho SWIR1 }$$</p>
+<h4 id="example">Example</h4>
+<pre><code class="lang-coffee">library(rLandsat8)
+
+setwd(&quot;~/Downloads&quot;)
+product  &lt;- &quot;LC82040322013219LGN00&quot;
+l &lt;- ReadLandsat8(product)
+
+ndvi &lt;- ToLSWI(l)
+</code></pre>
 
                     
                     </section>
@@ -475,10 +504,10 @@
         </div>
 
         
-        <a href="../section1/discover.html" class="navigation navigation-prev " aria-label="Previous page: Discovering data from Terradue"><i class="fa fa-angle-left"></i></a>
+        <a href="../section3/bt.html" class="navigation navigation-prev " aria-label="Previous page: At Satellite Brightness Temperature"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../section2/release.html" class="navigation navigation-next " aria-label="Next page: Installing a release"><i class="fa fa-angle-right"></i></a>
+        <a href="../section3/nbr.html" class="navigation navigation-next " aria-label="Next page: Normalized Burn Ratio"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
