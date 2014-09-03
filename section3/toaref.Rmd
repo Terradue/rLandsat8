@@ -42,5 +42,5 @@ setwd("~/Downloads")
 product <- "LC82040322013219LGN00"
 
 l <- ReadLandsat8(product)
-reflectance.blue <- ToTOAReflectance(landsat8=l, band=l$band$blue)
+reflectance.blue <- ToTOAReflectance(landsat8=l, band="blue")
 ```

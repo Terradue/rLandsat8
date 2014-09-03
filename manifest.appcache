@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Revision 1409722265317
+# Revision 1409722845705
 
 CACHE:
 index.html
@@ -10,6 +10,7 @@ section2/builddoc.html
 section2/development.html
 section2/installation.html
 section2/release.html
+section3/bt.html
 section3/read.html
 section3/started.html
 section3/toarad.html

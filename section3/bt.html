@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>Read Landsat 8 data | rLandsat8 - an R interface to Landsat8</title>
+        <title>At Satellite Brightness Temperature | rLandsat8 - an R interface to Landsat8</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 0.5.6">
@@ -19,10 +19,10 @@
     <meta name="author" content="Terradue">
     
     
-    <link rel="next" href="../section3/toarad.html" />
+    <link rel="next" href="../section3/ndvi.html" />
     
     
-    <link rel="prev" href="../section3/started.html" />
+    <link rel="prev" href="../section3/toaref.html" />
     
 
         
@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rLandsat8" data-level="3.1" data-basepath=".." data-revision="1409722845704">
+    <div class="book" data-github="Terradue/rLandsat8" data-level="3.4" data-basepath=".." data-revision="1409722845704">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -118,7 +118,7 @@
         
         
         <li>
-            <a href="https://github.com/Terradue/rLandsat8/edit/master/section3/read.md" target="blank" class="contribute-link">Edit and Contribute</a>
+            <a href="https://github.com/Terradue/rLandsat8/edit/master/section3/bt.md" target="blank" class="contribute-link">Edit and Contribute</a>
         </li>
         
 
@@ -416,7 +416,7 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="book-progress">
     <div class="bar">
-        <div class="inner" style="width: 60%;min-width: 53.333333333333336%;"></div>
+        <div class="inner" style="width: 80%;min-width: 73.33333333333333%;"></div>
     </div>
     <div class="chapters">
     
@@ -440,11 +440,11 @@
     
         <a href="../section3/read.html" title="Read Landsat 8 data" class="chapter done " data-progress="3.1" style="left: 60%;"></a>
     
-        <a href="../section3/toarad.html" title="DN to TOA Radiance" class="chapter  " data-progress="3.2" style="left: 66.66666666666667%;"></a>
+        <a href="../section3/toarad.html" title="DN to TOA Radiance" class="chapter done " data-progress="3.2" style="left: 66.66666666666667%;"></a>
     
-        <a href="../section3/toaref.html" title="DN to TOA Reflectance" class="chapter  " data-progress="3.3" style="left: 73.33333333333333%;"></a>
+        <a href="../section3/toaref.html" title="DN to TOA Reflectance" class="chapter done " data-progress="3.3" style="left: 73.33333333333333%;"></a>
     
-        <a href="../section3/bt.html" title="At Satellite Brightness Temperature" class="chapter  " data-progress="3.4" style="left: 80%;"></a>
+        <a href="../section3/bt.html" title="At Satellite Brightness Temperature" class="chapter done " data-progress="3.4" style="left: 80%;"></a>
     
         <a href="../section3/ndvi.html" title="NDVI" class="chapter  " data-progress="3.5" style="left: 86.66666666666667%;"></a>
     
@@ -457,24 +457,23 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_10">
+                    <section class="normal" id="section-gitbook_9">
                     
-                        <p>To read a Landsat 8 product use the <em>ReadLandsat8</em> function:</p>
+                        <p>TIRS band data can be converted from spectral radiance to brightness temperature using the thermal constants provided in the metadata file:</p>
+<p>$$T\quad =\quad \frac { K2 }{ \ln { (\frac { K1 }{ L\lambda  } +1) }  }$$ </p>
+<p>where:              </p>
+<p>  \( T \)  = At-satellite brightness temperature (K)</p>
+<p>  \( { L\lambda  } \) = TOA spectral radiance (Watts/( m2 <em> srad </em> μm))</p>
+<p>  \( K1 \) = Band-specific thermal conversion constant from the metadata (K1_CONSTANT_BAND_x, where x is the band number, 10 or 11)</p>
+<p>  \( K2 \) = Band-specific thermal conversion constant from the metadata (K2_CONSTANT_BAND_x, where x is the band number, 10 or 11)</p>
+<h3 id="example">Example</h3>
 <pre><code class="lang-coffee">library(rLandsat8)
-
 setwd(&quot;~/Downloads&quot;)
-product  &lt;- &quot;LC82040322013219LGN00&quot;
+product &lt;- &quot;LC82040322013219LGN00&quot;
+
 l &lt;- ReadLandsat8(product)
-</code></pre>
-<p>Access the product metadata</p>
-<pre><code class="lang-coffee">product.metadata &lt;- l$metadata
-</code></pre>
-<p>product.metadata is an R list containing the Landsat 8 product metadata.</p>
-<p>To access a metadata field value, e.g. the <em>wrs path</em>, do:</p>
-<pre><code class="lang-coffee">product.metadata$wrs_path
-</code></pre>
-<p>To access a band:</p>
-<pre><code class="lang-coffee">blue &lt;- l$band$blue
+
+btemp &lt;- ToAtSatelliteBrightnessTemperature(l, band=&quot;tirs1&quot;)
 </code></pre>
 
                     
@@ -485,10 +484,10 @@ l &lt;- ReadLandsat8(product)
         </div>
 
         
-        <a href="../section3/started.html" class="navigation navigation-prev " aria-label="Previous page: Getting started"><i class="fa fa-angle-left"></i></a>
+        <a href="../section3/toaref.html" class="navigation navigation-prev " aria-label="Previous page: DN to TOA Reflectance"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../section3/toarad.html" class="navigation navigation-next " aria-label="Next page: DN to TOA Radiance"><i class="fa fa-angle-right"></i></a>
+        <a href="../section3/ndvi.html" class="navigation navigation-next " aria-label="Next page: NDVI"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
