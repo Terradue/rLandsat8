@@ -10,9 +10,12 @@ $$\rho \lambda \prime \quad =\quad M\rho { Q }cal\quad +\quad A\rho$$
 
 where:              
 
-  \\(\rho \lambda \prime \\) = TOA planetary reflectance, without correction for solar angle.  Note that ρλ' does not contain a correction for the sun angle.
+  \\(\rho \lambda \prime \\) = TOA planetary reflectance, without correction for solar angle.  Note that \\(\rho \lambda \prime \\) does not contain a correction for the sun angle.
+
   \\(M\rho \\) = Band-specific multiplicative rescaling factor from the metadata (REFLECTANCE_MULT_BAND_x, where x is the band number)
+
   \\(A\rho \\) = Band-specific additive rescaling factor from the metadata (REFLECTANCE_ADD_BAND_x, where x is the band number)
+
   \\(Qcal \\) = Quantized and calibrated standard product pixel values (DN)
 
 TOA reflectance with a correction for the sun angle is then:
@@ -22,7 +25,9 @@ $$\rho \lambda \quad =\quad \frac { \rho \lambda \prime  }{ \cos { { \theta  }_{
 where:              
 
   \\(\rho \lambda \\)  = TOA planetary reflectance
+
   \\( { \theta  }_{ se }\\) = Local sun elevation angle. The scene center sun elevation angle in degrees is provided in the metadata (SUN_ELEVATION).
+
   \\( { \theta  }_{ sz }\\) = Local solar zenith angle;  \\( { \theta  }_{ sz }\\) = 90° - \\( { \theta  }_{ se }\\)
 
 For more accurate reflectance calculations, per pixel solar angles could be used instead of the scene center solar angle, but per pixel solar zenith angles are not currently provided with the Landsat 8 products.
