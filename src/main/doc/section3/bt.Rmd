@@ -1,0 +1,25 @@
+TIRS band data can be converted from spectral radiance to brightness temperature using the thermal constants provided in the metadata file:
+
+$$T\quad =\quad \frac { K2 }{ \ln { (\frac { K1 }{ L\lambda  } +1) }  }$$ 
+
+where:              
+
+  \\( T \\)  = At-satellite brightness temperature (K)
+  
+  \\( { L\lambda  } \\) = TOA spectral radiance (Watts/( m2 * srad * μm))
+  
+  \\( K1 \\) = Band-specific thermal conversion constant from the metadata (K1_CONSTANT_BAND_x, where x is the band number, 10 or 11)
+  
+  \\( K2 \\) = Band-specific thermal conversion constant from the metadata (K2_CONSTANT_BAND_x, where x is the band number, 10 or 11)
+  
+### Example
+  
+```coffee
+library(rLandsat8)
+setwd("~/Downloads")
+product <- "LC82040322013219LGN00"
+
+l <- ReadLandsat8(product)
+
+btemp <- ToAtSatelliteBrightnessTemperature(l, band="tirs1")
+```
