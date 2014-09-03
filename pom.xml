@@ -50,23 +50,7 @@
 
 	<build>
 		<plugins>
-<!--
-			<plugin>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<filesets>
-						<fileset>
-							<directory>/application</directory>
-							<includes>
-								<include>**/*</include>
-							</includes>
-							<followSymlinks>false</followSymlinks>
-						</fileset>
-					</filesets>
-				</configuration>
-			</plugin>
--->
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
@@ -187,26 +171,7 @@
 							</arguments>
 						</configuration>
 					</execution>
-				<!--
-					<execution>
-						<id>R install app</id>
-						<phase>install</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>R</executable>
-							<workingDirectory>${project.build.directory}/R/src</workingDirectory>
-							<arguments>
-								<argument>CMD</argument>
-								<argument>INSTALL</argument>
-								<argument>-l</argument>
-								<argument>/application/share/R/library</argument>
-								<argument>${project.build.directory}/R/src/rLandsat8_${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.tar.gz</argument>
-							</arguments>
-						</configuration>
-					</execution>
-				-->
+				
 					<execution>
 						<id>rgitbook</id>
 						<phase>site</phase>
@@ -224,87 +189,6 @@
 
 				</executions>
 			</plugin>
-<!--
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.6</version>
-				<executions>
-					<execution>
-						<id>copy-app-resources</id>
-						<phase>install</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>/application</outputDirectory>
-							<resources>
-								<resource>
-									<directory>${basedir}/src/main/app-resources</directory>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>rpm-maven-plugin</artifactId>
-				<extensions>true</extensions>
-				<configuration>
-					<copyright>${project.inceptionYear}, Terradue, GPL</copyright>
-					<distribution>Terradue ${project.inceptionYear}</distribution>
-					<group>air</group>
-					<packager>Terradue</packager>
-					<name>${project.artifactId}</name>
-					<defaultDirmode>775</defaultDirmode>
-					<defaultFilemode>664</defaultFilemode>
-					<defaultUsername>root</defaultUsername>
-					<defaultGroupname>ciop</defaultGroupname>
-					<prefix>/application</prefix>
-					<autoRequires>true</autoRequires>
-					<release>ciop</release>
-					<mappings>
-						<mapping>
-							<directory>/application</directory>
-							<sources>
-								<source>
-									<location>${basedir}/src/main/app-resources</location>
-								</source>
-							</sources>
-						</mapping>
-						<mapping>
-							<directory>/application/share/R/library</directory>
-							<sources>
-								<source>
-									<location>${project.build.directory}/R/lib</location>
-								</source>
-							</sources>
-						</mapping>
-						<mapping>
-							<directory>/application</directory>
-							<sources>
-								<source>
-									<location>${basedir}/src/main/app-resources</location>
-									<includes>
-										<include>**/run</include>
-										<include>**/run.R</include>
-										<include>**/bin/*</include>
-										<include>**/*.sh</include>
-										<include>**/libexec/*</include>
-									</includes>
-								</source>
-							</sources>
-							<filemode>775</filemode>
-						</mapping>
-					</mappings>
-
-					<provides>
-						<provide>${project.artifactId}</provide>
-					</provides>
-					<needarch>noarch</needarch>
-				</configuration>
-			</plugin>-->
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -338,21 +222,7 @@
 							<goal>run</goal>
 						</goals>
 					</execution>
-				<!--
-					<execution>
-						<id>change perm</id>
-						<phase>install</phase>
-						<configuration>
-							<target>
-								<chmod dir="/application" includes="**/bin/*, **/run*"
-									perm="755" />
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				-->
+				
 				</executions>
 			</plugin>
 
@@ -374,22 +244,7 @@
 				<artifactId>github-release-plugin</artifactId>
 				<version>1.0.3</version>
 				<executions>
-				<!--
-					<execution>
-						<id>github-upload</id>
-						<phase>deploy</phase>
-						<goals>
-							<goal>release</goal>
-						</goals>
-						<inherited>false</inherited>
-						<configuration>
-							<releaseName>v${project.version}</releaseName>
-							<tag>v${project.version}</tag>
-							<artifact>${project.build.directory}/rpm/${project.artifactId}/RPMS/noarch/${project.artifactId}-${parsedVersion.majorVersion}.${parsedVersion.minorVersion}-ciop.noarch.rpm</artifact>
-							<overwriteArtifact>true</overwriteArtifact>
-						</configuration>
-					</execution>
-				-->
+				
 					<execution>
 						<id>github-upload-R</id>
 						<phase>deploy</phase>

@@ -13,11 +13,7 @@
 
 ToAtSatelliteBrightnessTemperature <- function(landsat8, band) {
   
-  bandnames <-c("aerosol", "blue", "green", "red",
-  "nir", "swir1", "swir2",
-  "panchromatic",
-  "cirrus",
-  "tirs1", "tirs2")
+  bandnames <-c("tirs1", "tirs2")
   
   # todo stop if band != tirs1, tirs2
   
