@@ -39,3 +39,37 @@ Ordinal severity levels and example range of \\(\Delta \\)NBR (scaled by \\({ 10
 | High Severity           | +660 to +1300 |
 
 > These value ranges are flexible; scene-pair dependent; shifts in thresholds +100 points are possible. dNBR less than about -550, or greater than about +1350 may occur, but usually are not considered burned. Rather, they likely are anomalies caused by miss-registration, clouds, or other factors not related to real land cover differences.
+
+#### Example
+
+```coffee
+library(rLandsat8)
+setwd("~/Downloads/")
+
+prefire <- "LC82040322013219LGN00"
+postfire <- "LC82040322013267LGN00"
+
+lspre <- ReadLandsat8(prefire)
+lspost <- ReadLandsat8(postfire)
+
+r <- 1000 * dNBR(lspre, lspost)
+
+m <- c(-Inf, -500, -1, -500, -251, 1, -251, -101, 2, -101, 99, 3, 99, 269, 
+  4, 269, 439, 5, 439, 659, 6, 659, 1300, 7, 1300, +Inf, -1)
+class.mat <- matrix(m, ncol = 3, byrow = TRUE)
+
+reclass <- reclassify(r, class.mat, right=NA)
+
+reclass <- ratify(reclass)
+rat <- levels(reclass)[[1]]
+rat$legend  <- c("NA", "Enhanced Regrowth, High", "Enhanced Regrowth, Low", "Unburned", "Low Severity", "Moderate-low Severity", "Moderate-high Severity", "High Severity")
+levels(reclass) <- rat
+
+my_col=c('white', 'green', "yellow", "black", "orange", "brown", "red", "purple")
+
+plot(reclass,col=my_col,legend=F,box=F,axes=F)
+
+legend(x='right', legend =rat$legend,fill = my_col, y='right')
+
+plot(reclass)
+```
