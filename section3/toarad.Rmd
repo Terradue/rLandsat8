@@ -6,3 +6,26 @@ OLI and TIRS band data can be converted to TOA spectral radiance using the radia
 
 $${ L }_{ \lambda  }={ M }{ L }{ Q }{ cal }+{ A }{ L }$$
 
+where:              
+
+\\( { L }_{ \lambda  } \\) = TOA spectral radiance (Watts/( m2 * srad * μm))
+
+\\( { M }{ L } \\) = Band-specific multiplicative rescaling factor from the metadata (RADIANCE_MULT_BAND_x, where x is the band number)
+
+\\( { A }{ L } \\) = Band-specific additive rescaling factor from the metadata (RADIANCE_ADD_BAND_x, where x is the band number)
+
+\\( { Q }{ cal } \\) = Quantized and calibrated standard product pixel values (DN)  
+
+### Example
+
+Calculate the TOA radiance of the blue band
+
+```coffee
+library(rLandsat8)
+
+setwd("~/Downloads")
+product  <- "LC82040322013219LGN00"
+l <- ReadLandsat8(product)
+
+radiance.blue <- ToTOARadiance(landsat8=l, band=l$band$blue)
+```

@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rLandsat8" data-level="3.2" data-basepath=".." data-revision="1409721876854">
+    <div class="book" data-github="Terradue/rLandsat8" data-level="3.2" data-basepath=".." data-revision="1409722265316">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -463,6 +463,21 @@
 <p>The products are delivered in 16-bit unsigned integer format and can be rescaled to the Top Of Atmosphere (TOA) radiance using radiometric rescaling coefficients provided in the product metadata file (MTL file), as described below.</p>
 <p>OLI and TIRS band data can be converted to TOA spectral radiance using the radiance rescaling factors provided in the metadata file: </p>
 <p>$${ L }_{ \lambda  }={ M }{ L }{ Q }{ cal }+{ A }{ L }$$</p>
+<p>where:              </p>
+<p>\( { L }_{ \lambda  } \) = TOA spectral radiance (Watts/( m2 <em> srad </em> μm))</p>
+<p>\( { M }{ L } \) = Band-specific multiplicative rescaling factor from the metadata (RADIANCE_MULT_BAND_x, where x is the band number)</p>
+<p>\( { A }{ L } \) = Band-specific additive rescaling factor from the metadata (RADIANCE_ADD_BAND_x, where x is the band number)</p>
+<p>\( { Q }{ cal } \) = Quantized and calibrated standard product pixel values (DN)  </p>
+<h3 id="example">Example</h3>
+<p>Calculate the TOA radiance of the blue band</p>
+<pre><code class="lang-coffee">library(rLandsat8)
+
+setwd(&quot;~/Downloads&quot;)
+product  &lt;- &quot;LC82040322013219LGN00&quot;
+l &lt;- ReadLandsat8(product)
+
+radiance.blue &lt;- ToTOARadiance(landsat8=l, band=l$band$blue)
+</code></pre>
 
                     
                     </section>

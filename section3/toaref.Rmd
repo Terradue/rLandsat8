@@ -31,3 +31,16 @@ where:
   \\( { \theta  }{ sz }\\) = Local solar zenith angle;  \\( { \theta  }{ sz }\\) = 90° - \\( { \theta  }{ se }\\)
 
 For more accurate reflectance calculations, per pixel solar angles could be used instead of the scene center solar angle, but per pixel solar zenith angles are not currently provided with the Landsat 8 products.
+
+### Example
+
+Calculate the TOA reflectance of the blue band
+
+```coffee
+library(rLandsat8)
+setwd("~/Downloads")
+product <- "LC82040322013219LGN00"
+
+l <- ReadLandsat8(product)
+reflectance.blue <- ToTOAReflectance(landsat8=l, band=l$band$blue)
+```
