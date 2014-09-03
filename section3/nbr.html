@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rLandsat8" data-level="3.6" data-basepath=".." data-revision="1409730058228">
+    <div class="book" data-github="Terradue/rLandsat8" data-level="3.6" data-basepath=".." data-revision="1409730226485">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -473,7 +473,7 @@ ndvi &lt;- ToNBR(l)
 </code></pre>
 <h2 id="-delta-nbr">\(\Delta \)NBR</h2>
 <p>Generate the differenced (or delta) NBR:</p>
-<p>$$\Delta NBR=NBRprefire\quad =\quad NBRpostfire$$</p>
+<p>$$\Delta NBR=NBRprefire\quad -\quad NBRpostfire$$</p>
 <p>This isolates burned from unburned areas, provides a quantitative measure of absolute change in NBR. </p>
 <p>Practical data range \(\approx \) –500 to + 1300 when scaled by \({ 10 }^{ 3 }\)</p>
 <p>Ordinal severity levels and example range of \(\Delta \)NBR (scaled by \({ 10 }^{ 3 }\)) are shown:</p>
@@ -511,6 +511,7 @@ ndvi &lt;- ToNBR(l)
 </tr>
 <tr>
 <td style="text-align:center">High Severity</td>
+<td>+660 to +1300</td>
 </tr>
 </tbody>
 </table>
