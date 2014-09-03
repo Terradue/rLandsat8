@@ -14,10 +14,7 @@
 
 ToTOAReflectance <- function(landsat8, band) {
 
-  bandnames <-c("aerosol", "blue", "green", "red",
-  "nir", "swir1", "swir2",
-  "panchromatic",
-  "cirrus")
+  bandnames <-c("green", "red", "nir", "swir1", "swir2")
   
   # todo check if band is in bandnames
 
