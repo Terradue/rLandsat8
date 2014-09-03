@@ -1,0 +1,33 @@
+# Building and installing the development version
+
+The rLandsat8 package is built using maven.
+
+From a terminal: 
+
+```bash
+cd
+git clone git@github.com:Terradue/rLandsat8.git
+cd rLandsat8
+mvn compile
+```
+
+That generates a compressed archive with the rLandsat8 package in:
+
+```
+~/rLandsat8/target/R/src/rLandsat8_x.y.z.tar.gz
+```
+
+To install the package, start an R session and run:
+
+```coffee
+install.packages("~/rLandsat8/target/R/src/rLandsat8_x.y.z.tar.gz", repos=NULL, type="source")
+```
+
+> Note x.y.z is the development version number.
+
+Then load the library:
+
+```coffee
+library(rLandsat8)
+```
+
