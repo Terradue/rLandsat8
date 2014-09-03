@@ -8,7 +8,7 @@ rLandsat8 is an R package to manipulate Landsat 8 data.
 
 This guide provides:
 
-* An introduction to the Landsat 8 mission 
+* An introduction to Landsat 8 and how to get data 
 * The package building and installation instructions
 * A Getting Started guide with examples
 
