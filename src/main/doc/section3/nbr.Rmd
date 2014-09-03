@@ -16,7 +16,7 @@ l <- ReadLandsat8(product)
 ndvi <- ToNBR(l)
 ```
 
-## \((\Delta ))\NBR
+## \\(\Delta \\)NBR
 
 Generate the differenced (or delta) NBR:
 
@@ -24,9 +24,9 @@ $$\Delta NBR=NBRprefire\quad =\quad NBRpostfire$$
 
 This isolates burned from unburned areas, provides a quantitative measure of absolute change in NBR. 
 
-Practical data range \((\approx ))\ –500 to + 1300 when scaled by \(({ 10 }^{ 3 }))\
+Practical data range \\(\approx \\) –500 to + 1300 when scaled by \\({ 10 }^{ 3 }\\)
 
-Ordinal severity levels and example range of \((\Delta ))\NBR (scaled by \(({ 10 }^{ 3 }))\) are shown:
+Ordinal severity levels and example range of \\(\Delta \\)NBR (scaled by \\({ 10 }^{ 3 }\\)) are shown:
 
 |      Severity Level     | NBR Range    |
 |:-----------------------:|--------------|
