@@ -20,14 +20,14 @@ where:
 
 TOA reflectance with a correction for the sun angle is then:
 
-$$\rho \lambda \quad =\quad \frac { \rho \lambda \prime  }{ \cos { { \theta  }_{ sz } }  } \quad =\quad \frac { \rho \lambda \prime  }{ \sin { { \theta  }_{ se } }  }$$
+$$\rho \lambda \quad =\quad \frac { \rho \lambda \prime  }{ \cos { { (\theta  }{ sz) } }  } \quad =\quad \frac { \rho \lambda \prime  }{ \sin { { (\theta  }{ se) } }  }$$
 
 where:              
 
   \\(\rho \lambda \\)  = TOA planetary reflectance
 
-  \\( { \theta  }_{ se }\\) = Local sun elevation angle. The scene center sun elevation angle in degrees is provided in the metadata (SUN_ELEVATION).
+  \\( { \theta  }{ se }\\) = Local sun elevation angle. The scene center sun elevation angle in degrees is provided in the metadata (SUN_ELEVATION).
 
-  \\( { \theta  }_{ sz }\\) = Local solar zenith angle;  \\( { \theta  }_{ sz }\\) = 90° - \\( { \theta  }_{ se }\\)
+  \\( { \theta  }{ sz }\\) = Local solar zenith angle;  \\( { \theta  }{ sz }\\) = 90° - \\( { \theta  }{ se }\\)
 
 For more accurate reflectance calculations, per pixel solar angles could be used instead of the scene center solar angle, but per pixel solar zenith angles are not currently provided with the Landsat 8 products.

@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rLandsat8" data-level="3.3" data-basepath=".." data-revision="1409721700961">
+    <div class="book" data-github="Terradue/rLandsat8" data-level="3.3" data-basepath=".." data-revision="1409721876854">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -470,11 +470,11 @@
 <p>  \(A\rho \) = Band-specific additive rescaling factor from the metadata (REFLECTANCE_ADD_BAND_x, where x is the band number)</p>
 <p>  \(Qcal \) = Quantized and calibrated standard product pixel values (DN)</p>
 <p>TOA reflectance with a correction for the sun angle is then:</p>
-<p>$$\rho \lambda \quad =\quad \frac { \rho \lambda \prime  }{ \cos { { \theta  }<em>{ sz } }  } \quad =\quad \frac { \rho \lambda \prime  }{ \sin { { \theta  }</em>{ se } }  }$$</p>
+<p>$$\rho \lambda \quad =\quad \frac { \rho \lambda \prime  }{ \cos { { (\theta  }{ sz) } }  } \quad =\quad \frac { \rho \lambda \prime  }{ \sin { { (\theta  }{ se) } }  }$$</p>
 <p>where:              </p>
 <p>  \(\rho \lambda \)  = TOA planetary reflectance</p>
-<p>  \( { \theta  }_{ se }\) = Local sun elevation angle. The scene center sun elevation angle in degrees is provided in the metadata (SUN_ELEVATION).</p>
-<p>  \( { \theta  }<em>{ sz }\) = Local solar zenith angle;  \( { \theta  }</em>{ sz }\) = 90° - \( { \theta  }_{ se }\)</p>
+<p>  \( { \theta  }{ se }\) = Local sun elevation angle. The scene center sun elevation angle in degrees is provided in the metadata (SUN_ELEVATION).</p>
+<p>  \( { \theta  }{ sz }\) = Local solar zenith angle;  \( { \theta  }{ sz }\) = 90° - \( { \theta  }{ se }\)</p>
 <p>For more accurate reflectance calculations, per pixel solar angles could be used instead of the scene center solar angle, but per pixel solar zenith angles are not currently provided with the Landsat 8 products.</p>
 
                     
