@@ -2,7 +2,7 @@
 #' @description Creates a raster with the TOA reflectance
 #'
 #' @param landsat8 list returned by rLandsat8::ReadLandsat8
-#' @param band Landsat 8 bandname (one of "aerosol", "blue", "green", "red", "nir", "swir1", "swir2", "panchromatic", "cirrus", "tirs1", "tirs2"
+#' @param band Landsat 5 bandname (one of "green", "red", "nir", "swir1", "swir2")
 #' @return TOA Reflectance raster
 #' @examples \dontrun{
 #' ls8 <- ReadLandsat8("LC81880342014174LGN00")
