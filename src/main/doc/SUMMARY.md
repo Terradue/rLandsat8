@@ -13,6 +13,6 @@ Welcome to rLandsat8!
     * [DN to TOA Radiance](section3/toarad.md)
     * [DN to TOA Reflectance](section3/toaref.md)
     * [At Satellite Brightness Temperature](section3/bt.md)
-    * [Vegatation indexes](section3/vegetation.md)
+    * [Vegetation indexes](section3/vegetation.md)
     * [Normalized Burn Ratio](section3/nbr.md)
 * [Citation](section4/citation.md)
