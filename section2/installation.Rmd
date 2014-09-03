@@ -1,5 +1,0 @@
-# Installation
-This chapter provides a guide to install to:
-* Install the rLandsat8 package from a release
-* Install the development version of the rLandsat8 package
-* Build this book
