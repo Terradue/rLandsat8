@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="UTF-8">
-        <title>Installation | rLandsat8 - an R interface to Landsat8</title>
+        <title>DN to TOA Reflectance | rLandsat8 - an R interface to Landsat8</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 0.5.6">
@@ -19,10 +19,10 @@
     <meta name="author" content="Terradue">
     
     
-    <link rel="next" href="../section2/release.html" />
+    <link rel="next" href="../section3/bt.html" />
     
     
-    <link rel="prev" href="../section1/discover.html" />
+    <link rel="prev" href="../section3/toarad.html" />
     
 
         
@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-github="Terradue/rLandsat8" data-level="2" data-basepath=".." data-revision="1409721555950">
+    <div class="book" data-github="Terradue/rLandsat8" data-level="3.3" data-basepath=".." data-revision="1409721555950">
     <div class="book-header">
     <!-- Actions Left -->
     <a href="#" class="btn pull-left toggle-summary" aria-label="Toggle summary"><i class="fa fa-align-justify"></i></a>
@@ -118,7 +118,7 @@
         
         
         <li>
-            <a href="https://github.com/Terradue/rLandsat8/edit/master/section2/installation.md" target="blank" class="contribute-link">Edit and Contribute</a>
+            <a href="https://github.com/Terradue/rLandsat8/edit/master/section3/toaref.md" target="blank" class="contribute-link">Edit and Contribute</a>
         </li>
         
 
@@ -416,7 +416,7 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="book-progress">
     <div class="bar">
-        <div class="inner" style="width: 26.666666666666668%;min-width: 20%;"></div>
+        <div class="inner" style="width: 73.33333333333333%;min-width: 66.66666666666667%;"></div>
     </div>
     <div class="chapters">
     
@@ -430,19 +430,19 @@
     
         <a href="../section2/installation.html" title="Installation" class="chapter done new-chapter" data-progress="2" style="left: 26.666666666666668%;"></a>
     
-        <a href="../section2/release.html" title="Installing a release" class="chapter  " data-progress="2.1" style="left: 33.333333333333336%;"></a>
+        <a href="../section2/release.html" title="Installing a release" class="chapter done " data-progress="2.1" style="left: 33.333333333333336%;"></a>
     
-        <a href="../section2/development.html" title="Installing the development version" class="chapter  " data-progress="2.2" style="left: 40%;"></a>
+        <a href="../section2/development.html" title="Installing the development version" class="chapter done " data-progress="2.2" style="left: 40%;"></a>
     
-        <a href="../section2/builddoc.html" title="Building the documentation" class="chapter  " data-progress="2.3" style="left: 46.666666666666664%;"></a>
+        <a href="../section2/builddoc.html" title="Building the documentation" class="chapter done " data-progress="2.3" style="left: 46.666666666666664%;"></a>
     
-        <a href="../section3/started.html" title="Getting started" class="chapter  new-chapter" data-progress="3" style="left: 53.333333333333336%;"></a>
+        <a href="../section3/started.html" title="Getting started" class="chapter done new-chapter" data-progress="3" style="left: 53.333333333333336%;"></a>
     
-        <a href="../section3/read.html" title="Read Landsat 8 data" class="chapter  " data-progress="3.1" style="left: 60%;"></a>
+        <a href="../section3/read.html" title="Read Landsat 8 data" class="chapter done " data-progress="3.1" style="left: 60%;"></a>
     
-        <a href="../section3/toarad.html" title="DN to TOA Radiance" class="chapter  " data-progress="3.2" style="left: 66.66666666666667%;"></a>
+        <a href="../section3/toarad.html" title="DN to TOA Radiance" class="chapter done " data-progress="3.2" style="left: 66.66666666666667%;"></a>
     
-        <a href="../section3/toaref.html" title="DN to TOA Reflectance" class="chapter  " data-progress="3.3" style="left: 73.33333333333333%;"></a>
+        <a href="../section3/toaref.html" title="DN to TOA Reflectance" class="chapter done " data-progress="3.3" style="left: 73.33333333333333%;"></a>
     
         <a href="../section3/bt.html" title="At Satellite Brightness Temperature" class="chapter  " data-progress="3.4" style="left: 80%;"></a>
     
@@ -457,15 +457,25 @@
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_7">
+                    <section class="normal" id="section-gitbook_12">
                     
-                        <h1 id="installation">Installation</h1>
-<p>This chapter provides a guide to install to:</p>
-<ul>
-<li>Install the rLandsat8 package from a release</li>
-<li>Install the development version of the rLandsat8 package</li>
-<li>Build this book</li>
-</ul>
+                        <p>The standard Landsat 8 products provided by the USGS EROS Center consist of quantized and calibrated scaled Digital Numbers (DN) representing multispectral image data acquired by both the Operational Land Imager (OLI) and Thermal Infrared Sensor (TIRS).  </p>
+<p>The products are delivered in 16-bit unsigned integer format and can be rescaled to the Top Of Atmosphere (TOA) reflectance using radiometric rescaling coefficients provided in the product metadata file (MTL file), as briefly described below.</p>
+<p>OLI band data can be converted to TOA planetary reflectance using reflectance rescaling coefficients provided in the product metadata file (MTL file).  </p>
+<p>The following equation is used to convert DN values to TOA reflectance for OLI data as follows:</p>
+<p>$$\rho \lambda \prime \quad =\quad M\rho { Q }cal\quad +\quad A\rho$$</p>
+<p>where:              </p>
+<p>  \(\rho \lambda \prime \) = TOA planetary reflectance, without correction for solar angle.  Note that ρλ&#39; does not contain a correction for the sun angle.
+  \(M\rho \) = Band-specific multiplicative rescaling factor from the metadata (REFLECTANCE_MULT_BAND_x, where x is the band number)
+  \(A\rho \) = Band-specific additive rescaling factor from the metadata (REFLECTANCE_ADD_BAND_x, where x is the band number)
+  \(Qcal \) = Quantized and calibrated standard product pixel values (DN)</p>
+<p>TOA reflectance with a correction for the sun angle is then:</p>
+<p>$$\rho \lambda \quad =\quad \frac { \rho \lambda \prime  }{ \cos { { \theta  }<em>{ sz } }  } \quad =\quad \frac { \rho \lambda \prime  }{ \sin { { \theta  }</em>{ se } }  }$$</p>
+<p>where:              </p>
+<p>  \(\rho \lambda \)  = TOA planetary reflectance
+  \( { \theta  }<em>{ se }\) = Local sun elevation angle. The scene center sun elevation angle in degrees is provided in the metadata (SUN_ELEVATION).
+  \( { \theta  }</em>{ sz }\) = Local solar zenith angle;  \( { \theta  }<em>{ sz }\) = 90° - \( { \theta  }</em>{ se }\)</p>
+<p>For more accurate reflectance calculations, per pixel solar angles could be used instead of the scene center solar angle, but per pixel solar zenith angles are not currently provided with the Landsat 8 products.</p>
 
                     
                     </section>
@@ -475,10 +485,10 @@
         </div>
 
         
-        <a href="../section1/discover.html" class="navigation navigation-prev " aria-label="Previous page: Discovering data from Terradue"><i class="fa fa-angle-left"></i></a>
+        <a href="../section3/toarad.html" class="navigation navigation-prev " aria-label="Previous page: DN to TOA Radiance"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../section2/release.html" class="navigation navigation-next " aria-label="Next page: Installing a release"><i class="fa fa-angle-right"></i></a>
+        <a href="../section3/bt.html" class="navigation navigation-next " aria-label="Next page: At Satellite Brightness Temperature"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
