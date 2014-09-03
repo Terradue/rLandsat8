@@ -28,14 +28,14 @@ Practical data range \\(\approx \\) –500 to + 1300 when scaled by \\({ 10 }^{ 
 
 Ordinal severity levels and example range of \\(\Delta \\)NBR (scaled by \\({ 10 }^{ 3 }\\)) are shown:
 
-|      Severity Level     | NBR Range    |
-|:-----------------------:|--------------|
-| Enhanced Regrowth, High | -500 to -251 |
-| Enhanced Regrowth, Low  | -250 to -101 |
-| Unburned                | -100 to +99  |
-| Low Severity            | +100 to +269 |
-| Moderate-low Severity   | +270 to +439 |
-| Moderate-high Severity  | +440 to +659 |
-| High Severity           |              |
+|      Severity Level     | NBR Range     |
+|:-----------------------:|---------------|
+| Enhanced Regrowth, High | -500 to -251  |
+| Enhanced Regrowth, Low  | -250 to -101  |
+| Unburned                | -100 to +99   |
+| Low Severity            | +100 to +269  |
+| Moderate-low Severity   | +270 to +439  |
+| Moderate-high Severity  | +440 to +659  |
+| High Severity           | +660 to +1300 |
 
 > These value ranges are flexible; scene-pair dependent; shifts in thresholds +100 points are possible. dNBR less than about -550, or greater than about +1350 may occur, but usually are not considered burned. Rather, they likely are anomalies caused by miss-registration, clouds, or other factors not related to real land cover differences.
