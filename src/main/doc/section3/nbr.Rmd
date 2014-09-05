@@ -40,6 +40,9 @@ Ordinal severity levels and example range of \\(\Delta \\)NBR (scaled by \\({ 10
 
 > These value ranges are flexible; scene-pair dependent; shifts in thresholds +100 points are possible. dNBR less than about -550, or greater than about +1350 may occur, but usually are not considered burned. Rather, they likely are anomalies caused by miss-registration, clouds, or other factors not related to real land cover differences.
 
+
+Normalized Burn Ratio (NBR) need to compute the TOA Reflectance, so you can choose to use the sun angle correction, if sun angle correction is required, specifying is.suncorrected = TRUE (default value is is.suncorrected = FALSE)
+
 #### Example
 
 ```coffee
