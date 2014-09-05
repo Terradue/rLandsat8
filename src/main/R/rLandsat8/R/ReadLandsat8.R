@@ -27,6 +27,9 @@ ReadLandsat8 <- function(product) {
   
   meta.file <- paste0(product, "/", product, "_MTL.txt")
   
+  if (!file.exists(meta.file))
+       stop(paste(meta.file, "file not found."))
+  
   textLines <- readLines(meta.file)
   
   counts <- count.fields(textConnection(textLines), sep="=")

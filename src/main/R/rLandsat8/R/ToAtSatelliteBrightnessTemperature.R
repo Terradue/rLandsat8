@@ -1,7 +1,8 @@
 #' creates a raster with the brightness temperature extracted from Landsat tirs1 or tirs 2 band
 #' @description Creates a raster with the at satellite brightness temperature extracted from Landsat tirs1 or tirs2 band.
 #'
-#' @param product name of the product, e.g. LC80522102014165LGN00. It must be in the working directory.
+#' @param landsat8 list returned by rLandsat8::ReadLandsat8
+#' @param band Landsat 2 bandname (one of "tirs1", "tirs2")
 #' @return brightness temperature raster
 #' @examples \dontrun{
 #' ls8 <- ReadLandsat8("LC80522102014165LGN00")
@@ -13,9 +14,18 @@
 
 ToAtSatelliteBrightnessTemperature <- function(landsat8, band) {
   
-  bandnames <-c("tirs1", "tirs2")
+  bandnames <-c("aerosol", "blue", "green", "red",
+  "nir", "swir1", "swir2",
+  "panchromatic",
+  "cirrus",
+  "tirs1", "tirs2")
   
-  # todo stop if band != tirs1, tirs2
+  allowedbands <- c("tirs1", "tirs2")
+  
+  if (!band %in% allowedbands)
+  {
+       stop(paste(band, "band not allowed"))
+  }
   
   toarad <- ToTOARadiance(landsat8, band)
   

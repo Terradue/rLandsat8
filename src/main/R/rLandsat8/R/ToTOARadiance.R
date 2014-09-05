@@ -2,7 +2,7 @@
 #' @description Creates a raster with the TOA radiance
 #'
 #' @param landsat8 list returned by rLandsat8::ReadLandsat8
-#' @param band Landsat 8 bandname (one of "aerosol", "blue", "green", "red", "nir", "swir1", "swir2", "panchromatic", "cirrus", "tirs1", "tirs2" 
+#' @param band Landsat 11 bandname (one of "aerosol", "blue", "green", "red", "nir", "swir1", "swir2", "panchromatic", "cirrus", "tirs1", "tirs2" 
 #' @return TOA Radiance raster
 #' @examples \dontrun{
 #' ls8 <- ReadLandsat8("LC81880342014174LGN00")
@@ -20,8 +20,13 @@ ToTOARadiance <- function(landsat8, band) {
   "cirrus",
   "tirs1", "tirs2")
   
-  # todo check if band is in bandnames
-
+  allowedbands <- bandnames
+  
+  if (!band %in% allowedbands)
+  {
+       stop(paste(band, "band not allowed"))
+  }
+  
   idx <- seq_along(bandnames)[sapply(bandnames, function(x) band %in% x)]
 
   ml <- as.numeric(landsat8$metadata[[paste0("radiance_mult_band_",idx)]])
