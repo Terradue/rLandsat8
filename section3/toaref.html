@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="3.3" data-basepath=".." data-revision="1409913724554">
+    <div class="book"  data-level="3.3" data-basepath=".." data-revision="1409925664546">
     
 
 <div class="book-summary">
@@ -429,13 +429,21 @@
 <p>  \( { \theta  }{ sz }\) = Local solar zenith angle;  \( { \theta  }{ sz }\) = 90° - \( { \theta  }{ se }\)</p>
 <p>For more accurate reflectance calculations, per pixel solar angles could be used instead of the scene center solar angle, but per pixel solar zenith angles are not currently provided with the Landsat 8 products.</p>
 <h3 id="example">Example</h3>
-<p>Calculate the TOA reflectance of the blue band</p>
+<p>Calculate the TOA reflectance of the blue band (no sun angle correction is.suncorrected default value is set to FALSE)</p>
 <pre><code class="lang-coffee">library(rLandsat8)
 setwd(<span class="hljs-string">"~/Downloads"</span>)
 product &lt;- <span class="hljs-string">"LC82040322013219LGN00"</span>
 
 l &lt;- ReadLandsat8(product)
 reflectance.blue &lt;- ToTOAReflectance(landsat8=l, band=<span class="hljs-string">"blue"</span>)
+</code></pre>
+<p>Calculate the TOA reflectance of the green band using sun angle correction</p>
+<pre><code class="lang-coffee">library(rLandsat8)
+setwd(<span class="hljs-string">"~/Downloads"</span>)
+product &lt;- <span class="hljs-string">"LC82040322013219LGN00"</span>
+
+l &lt;- ReadLandsat8(product)
+reflectance.green &lt;- ToTOAReflectance(landsat8=l, band=<span class="hljs-string">"green"</span>, <span class="hljs-keyword">is</span>.suncorrected = TRUE)
 </code></pre>
 
                     

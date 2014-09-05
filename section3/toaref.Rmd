@@ -34,7 +34,7 @@ For more accurate reflectance calculations, per pixel solar angles could be used
 
 ### Example
 
-Calculate the TOA reflectance of the blue band
+Calculate the TOA reflectance of the blue band (no sun angle correction is.suncorrected default value is set to FALSE)
 
 ```coffee
 library(rLandsat8)
@@ -43,4 +43,15 @@ product <- "LC82040322013219LGN00"
 
 l <- ReadLandsat8(product)
 reflectance.blue <- ToTOAReflectance(landsat8=l, band="blue")
+```
+
+Calculate the TOA reflectance of the green band using sun angle correction
+
+```coffee
+library(rLandsat8)
+setwd("~/Downloads")
+product <- "LC82040322013219LGN00"
+
+l <- ReadLandsat8(product)
+reflectance.green <- ToTOAReflectance(landsat8=l, band="green", is.suncorrected = TRUE)
 ```

@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="3.6" data-basepath=".." data-revision="1409913724554">
+    <div class="book"  data-level="3.6" data-basepath=".." data-revision="1409925664546">
     
 
 <div class="book-summary">
@@ -470,6 +470,7 @@ ndvi &lt;- ToNBR(l)
 <blockquote>
 <p>These value ranges are flexible; scene-pair dependent; shifts in thresholds +100 points are possible. dNBR less than about -550, or greater than about +1350 may occur, but usually are not considered burned. Rather, they likely are anomalies caused by miss-registration, clouds, or other factors not related to real land cover differences.</p>
 </blockquote>
+<p>Normalized Burn Ratio (NBR) need to compute the TOA Reflectance, so you can choose to use the sun angle correction, if sun angle correction is required, specifying is.suncorrected = TRUE (default value is is.suncorrected = FALSE)</p>
 <h4 id="example">Example</h4>
 <pre><code class="lang-coffee">library(rLandsat8)
 setwd("~/Downloads/")

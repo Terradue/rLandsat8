@@ -33,7 +33,7 @@
 
 
         
-    <div class="book"  data-level="3.5" data-basepath=".." data-revision="1409913724554">
+    <div class="book"  data-level="3.5" data-basepath=".." data-revision="1409925664546">
     
 
 <div class="book-summary">
@@ -445,6 +445,16 @@ product  &lt;- <span class="hljs-string">"LC82040322013219LGN00"</span>
 l &lt;- ReadLandsat8(product)
 
 ndvi &lt;- ToLSWI(l)
+</code></pre>
+<p>The Normalized Difference Vegetation Index (NDVI), Modified Normalized Difference Water Index (MNDWI) and Land Surface Water Index (LSWI) need to compute the TOA Reflectance, so you can choose to use the sun angle correction, if sun angle correction is required, specifying is.suncorrected = TRUE (default value is is.suncorrected = FALSE)</p>
+<h4 id="example">Example</h4>
+<pre><code class="lang-coffee">library(rLandsat8)
+
+setwd(<span class="hljs-string">"~/Downloads"</span>)
+product  &lt;- <span class="hljs-string">"LC82040322013219LGN00"</span>
+l &lt;- ReadLandsat8(product, <span class="hljs-keyword">is</span>.suncorrected = TRUE)
+
+ndvi &lt;- ToMNDWI(l)
 </code></pre>
 
                     
