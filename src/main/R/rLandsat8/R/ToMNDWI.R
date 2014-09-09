@@ -18,7 +18,7 @@ ToMNDWI <- function(landsat8, is.suncorrected = FALSE) {
   green <- ToTOAReflectance(landsat8, "green", is.suncorrected)
   swir1 <- ToTOAReflectance(landsat8, "swir1", is.suncorrected)
   
-  mndwi <- (greeb - swir1) / (green + swir1)
+  mndwi <- (green - swir1) / (green + swir1)
   
   return(mndwi)
 
