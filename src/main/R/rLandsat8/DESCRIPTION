@@ -4,6 +4,7 @@ Title: This package consumes Landsat 8
 Version: ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}
 Date: 2014-04-22
 Author: Terradue
+LazyData: true
 Description: More about what it does (maybe more than one line)
 License: Apache License, Version 2.0
 Depends:

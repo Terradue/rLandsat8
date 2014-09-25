@@ -2,6 +2,7 @@
 #' @description Reads a Landsat 8 product
 #'
 #' @param product name of the product, e.g. LC80522102014165LGN00. It must be in the working directory
+#' @param crop parameter, default crop.param = NULL
 #' @return list with metadata and raster bands
 #' @examples \dontrun{
 #' ReadLandsat8("LC80522102014165LGN00")
@@ -10,7 +11,7 @@
 #' @export
 #' @import raster
 
-ReadLandsat8 <- function(product) {  
+ReadLandsat8 <- function(product, crop.param = NULL) {  
 
   raster.files <- list("aerosol"="file_name_band_1",
     "blue"="file_name_band_2", 
@@ -45,12 +46,31 @@ ReadLandsat8 <- function(product) {
   
   met <- as.list(as.data.frame(t(met), stringsAsFactors=FALSE))
   
-  bands=lapply(raster.files, function(x) {
-    r <- raster(paste0(product, "/", met[[x]]))
-    r@title <- names(raster.files)[seq_along(raster.files)[sapply(raster.files, function(a) x %in% a)]]
-    NAvalue(r) <- 0
-    return(r)
-  }) 
+  # checking crop param
+  if(!is.null(crop.param)){
+     if(class(crop.param)!="Extent")  
+          stop("An Extent object is required to crop a Raster.")
+     else{
+          bands=lapply(raster.files, function(x,y)try({
+               r <- raster(paste0(product, "/", met[[x]]))
+               r <- crop(r,y)
+               r@title <- names(raster.files)[seq_along(raster.files)[sapply(raster.files, function(a) x %in% a)]]
+               NAvalue(r) <- 0
+               return(r)
+               }, silent=TRUE), y = crop.param) 
+          
+          # check any band raster for error
+          if(class(bands$tirs2)=="try-error")
+               stop("extents do not overlap")
+     }
+  }
+  else
+       bands=lapply(raster.files, function(x) {
+            r <- raster(paste0(product, "/", met[[x]]))
+            r@title <- names(raster.files)[seq_along(raster.files)[sapply(raster.files, function(a) x %in% a)]]
+            NAvalue(r) <- 0
+            return(r)
+       }) 
   
   return(list(metadata=met,
     band=bands) 
