@@ -235,6 +235,7 @@
 							<target>
 								<mkdir dir="${project.build.directory}/R/src" />
 								<mkdir dir="${project.build.directory}/R/lib" />
+								<mkdir dir="/application/share/R/library" />
 							</target>
 						</configuration>
 						<goals>
