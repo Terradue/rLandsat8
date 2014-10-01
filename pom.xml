@@ -172,6 +172,25 @@
 						</configuration>
 					</execution>
 				
+					<!-- Installation for application -->
+					<execution>
+						<id>R install app</id>
+						<phase>install</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>R</executable>
+							<workingDirectory>${project.build.directory}/R/src</workingDirectory>
+							<arguments>
+								<argument>CMD</argument>
+								<argument>INSTALL</argument>
+								<argument>-l</argument>
+								<argument>/application/share/R/library</argument>
+								<argument>${project.build.directory}/R/src/rLandsat8_${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.tar.gz</argument>
+							</arguments>
+						</configuration>
+					</execution>
 					<execution>
 						<id>rgitbook</id>
 						<phase>site</phase>
