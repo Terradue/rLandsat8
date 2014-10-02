@@ -14,18 +14,6 @@
 #' @export
 
 ToRGB <- function(landsat8, band.red, band.green, band.blue, is.suncorrected = FALSE) {
-     # landsat 8 properties
-     landsat8.bitdepth <- 16
-     landsat8.colourlevel <- 2 ^ landsat8.bitdepth - 1
-     # check band components compatibilities
-
-     if(!is.null(green.component))
-          if( (red.component@ncols != green.component@ncols) | (red.component@nrows != green.component@nrows))
-               stop("The bands components must have the same dimension!")     
-     
-     if(!is.null(blue.component))
-          if( (red.component@ncols != blue.component@ncols) | (red.component@nrows != blue.component@nrows))
-               stop("The bands components must have the same dimension!")     
      
      red.component <- ToTOAReflectance(landsat8, band.red, is.suncorrected)
      
@@ -41,9 +29,9 @@ ToRGB <- function(landsat8, band.red, band.green, band.blue, is.suncorrected = F
      blue.component[blue.component > 1] <- 1
      blue.component[blue.component < 0] <- 0
      
-     rgb.stack <- stack(c(red.component * 255 / landsat8.colourlevel,
-                              green.component * 255 / landsat8.colourlevel,
-                              blue.component * 255 / landsat8.colourlevel))
+     rgb.stack <- stack(c(red.component * 255,
+                              green.component * 255,
+                              blue.component * 255))
      
      return(rgb.stack)
 }
