@@ -13,7 +13,7 @@
 #'
 #' @export
 
-ToRGB<-function(red.component, green.component, blue.component){
+ToRGB <- function(landsat8, band.red, band.green, band.blue, is.suncorrected = FALSE) {
      # landsat 8 properties
      landsat8.bitdepth <- 16
      landsat8.colourlevel <- 2 ^ landsat8.bitdepth - 1
@@ -26,6 +26,20 @@ ToRGB<-function(red.component, green.component, blue.component){
      if(!is.null(blue.component))
           if( (red.component@ncols != blue.component@ncols) | (red.component@nrows != blue.component@nrows))
                stop("The bands components must have the same dimension!")     
+     
+     red.component <- ToTOAReflectance(landsat8, band.red, is.suncorrected)
+     
+     red.component[red.component > 1] <- 1
+     red.component[red.component < 0] <- 0
+     
+     red.component <- ToTOAReflectance(landsat8, band.green, is.suncorrected)
+     
+     green.component[green.component > 1] <- 1
+     green.component[green.component < 0] <- 0
+     
+     red.component <- ToTOAReflectance(landsat8, band.blue, is.suncorrected)
+     blue.component[blue.component > 1] <- 1
+     blue.component[blue.component < 0] <- 0
      
      rgb.stack <- stack(c(red.component * 255 / landsat8.colourlevel,
                               green.component * 255 / landsat8.colourlevel,
