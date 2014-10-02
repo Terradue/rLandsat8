@@ -13,55 +13,26 @@
 #'
 #' @export
 
-ToRGB<-function(red.component, green.component = NULL, blue.component = NULL){
-     # landsat 8 properties
-     landsat8.bitdepth <- 16
-     landsat8.colourlevel <- 2 ^ landsat8.bitdepth - 1
-     mapping.landasta8colourlevel <- 255 / landsat8.colourlevel
+ToRGB <- function(landsat8, band.red, band.green, band.blue, is.suncorrected = FALSE) {
      
-     # check band components compatibilities
-     # we always have the red component (at least a channel to get a black & white image)
+     red.component <- ToTOAReflectance(landsat8, band.red, is.suncorrected)
      
-     if(!is.null(green.component))
-          if( (red.component@ncols != green.component@ncols) | (red.component@nrows != green.component@nrows))
-               stop("The bands components must have the same dimension!")     
+     red.component[red.component > 1] <- 1
+     red.component[red.component < 0] <- 0
      
-     if(!is.null(blue.component))
-          if( (red.component@ncols != blue.component@ncols) | (red.component@nrows != blue.component@nrows))
-               stop("The bands components must have the same dimension!")     
+     green.component <- ToTOAReflectance(landsat8, band.green, is.suncorrected)
      
-     # any r/g/b component is suitable for the setting operation
-     rgb.datasize <- red.component@ncols * red.component@nrows
-     GT   <- GridTopology(c(0, 0), c(1, 1), c(red.component@ncols, red.component@nrows))
+     green.component[green.component > 1] <- 1
+     green.component[green.component < 0] <- 0
      
-     SGDF.red <- SpatialGridDataFrame(GT, data=data.frame(red = rep(0,times=rgb.datasize)))
-     SGDF.green <- SpatialGridDataFrame(GT, data=data.frame(green = rep(0,times=rgb.datasize)))
-     SGDF.blue <- SpatialGridDataFrame(GT, data=data.frame(blue = rep(0,times=rgb.datasize)))
+     blue.component <- ToTOAReflectance(landsat8, band.blue, is.suncorrected)
      
-     r <- stack()
+     blue.component[blue.component > 1] <- 1
+     blue.component[blue.component < 0] <- 0
      
-     # we always have the red component (at least a channel to get a black & white image)
-     data.red <- getValues(red.component) * mapping.landasta8colourlevel
-     data.red[data.red < 0] <- 0
-     data.red[data.red > 255] <- 255
-     SGDF.red$red   <- data.red   * mapping.landasta8colourlevel
-     r <- stack(r,raster(SGDF.red))
+     rgb.stack <- stack(c(red.component * 255,
+                              green.component * 255,
+                              blue.component * 255))
      
-     if(!is.null(green.component)) {
-          data.green <- getValues(green.component) * mapping.landasta8colourlevel
-          data.green[data.green < 0] <- 0
-          data.green[data.green > 255] <- 255
-          SGDF.green$green <- data.green
-          r<- stack(r,raster(SGDF.green))
-     }
-     
-     if(!is.null(blue.component)) {
-          data.blue <- getValues(blue.component) * mapping.landasta8colourlevel
-          data.blue[data.blue < 0] <- 0
-          data.blue[data.blue > 255] <- 255
-          SGDF.blue$blue <- data.blue
-          r<- stack(r,raster(SGDF.blue)) 
-     }
-
-     return(r)
+     return(rgb.stack)
 }
