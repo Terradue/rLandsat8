@@ -20,12 +20,13 @@ ToRGB <- function(landsat8, band.red, band.green, band.blue, is.suncorrected = F
      red.component[red.component > 1] <- 1
      red.component[red.component < 0] <- 0
      
-     red.component <- ToTOAReflectance(landsat8, band.green, is.suncorrected)
+     green.component <- ToTOAReflectance(landsat8, band.green, is.suncorrected)
      
      green.component[green.component > 1] <- 1
      green.component[green.component < 0] <- 0
      
-     red.component <- ToTOAReflectance(landsat8, band.blue, is.suncorrected)
+     blue.component <- ToTOAReflectance(landsat8, band.blue, is.suncorrected)
+     
      blue.component[blue.component > 1] <- 1
      blue.component[blue.component < 0] <- 0
      
